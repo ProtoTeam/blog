@@ -3,4 +3,5 @@
 ## 文章列表
 
 * 系列文章
-    * [如何学习一门编程语言或框架](https://github.com/ProtoTeam/blog/201803/1.md)
+    * [如何学习一门编程语言或框架 -- Alan](https://github.com/ProtoTeam/blog/blob/master/201803/1.md)
+    * [TypeScript 实践 -- aoto](https://github.com/ProtoTeam/blog/blob/master/201803/2.md)
