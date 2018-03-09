@@ -1,0 +1,204 @@
+# web知识进阶——字符编解码
+
+>作者简介：nekron 蚂蚁金服·数据体验技术团队
+
+## 背景
+因为中文的博大精深，以及早期文件编码的不统一，造成了现在可能碰到的文件编码有`GB2312`、`GBk`、`GB18030`、`UTF-8`、`BIG5`等。因为编解码的知识比较底层和冷门，一直以来我对这几个编码的认知也很肤浅，很多时候也会疑惑编码名到底是大写还是小写，英文和数字之间是不是需要加“-”，规则到底是谁定的等等。
+
+我肤浅的认知如下：
+
+编码 | 说明 |
+--------- | ------------- |
+GB2312 | 最早的简体中文编码，还有海外版的HZ-GB-2312 |
+BIG5 | 繁体中文编码，主要用于台湾地区。些繁体中文游戏乱码，其实都是因为BIG5编码和GB2312编码的错误使用导致 |
+GBK | 简体+繁体，我就当它是GB2312+BIG5，非国家标准，只是中文环境内基本都遵守。后来了解到，K居然是“扩展”的拼音首字母，这很中国。。。 |
+GB18030 | GB家族的新版，向下兼容，最新国家标准，现在中文软件都理应支持的编码格式，文件解码的新选择 |
+UTF-8 | 不解释了，国际化编码标准，html现在最标准的编码格式。|
+
+## 概念梳理
+
+经过长时间的踩坑，我终于对这类知识有了一定的认知，现在把一些重要概念重新整理如下：
+
+首先要消化整个字符编解码知识，先要明确两个概念——字符集和字符编码。
+
+### 字符集
+顾名思义就是字符的集合，不同的字符集最直观的区别就是字符数量不相同，常见的字符集有ASCII字符集、GB2312字符集、BIG5字符集、 GB18030字符集、Unicode字符集等。
+
+### 字符编码
+字符编码决定了字符集到实际二进制字节的映射方式，每一种字符编码都有自己的设计规则，例如是固定字节数还是可变长度，此处不一一展开。
+
+常提到的GB2312、BIG5、UTF-8等，如果未特殊说明，一般语义上指的是字符编码而不是字符集。
+
+字符集和字符编码是一对多的关系，同一字符集可以存在多个字符编码，典型代表是Unicode字符集下有UTF-8、UTF-16等等。
+
+### BOM（Byte Order Mark）
+当使用windows记事本保存文件的时候，编码方式可以选择ANSI（通过locale判断，简体中文系统下是GB家族）、Unicode、Utf-8等。
+
+**为了清晰概念，需要指出此处的Unicode，编码方式其实是UTF-16LE。**
+
+有这么多编码方式，那文件打开的时候，windows系统是如何判断该使用哪种编码方式呢？
+
+答案是：windows（例如：简体中文系统）在文件头部增加了几个字节以表示编码方式，三个字节（0xef, 0xbb, 0xbf）表示UTF-8；两个字节（0xff, 0xfe或者0xfe, 0xff）表示UTF-16（Unicode）；无表示GB**。
+
+值得注意的是，由于BOM不表意，在解析文件内容的时候应该舍弃，不然会造成解析出来的内容头部有多余的内容。
+
+### LE（little-endian）和BE（big-endian）
+这个涉及到字节相关的知识了，不是本文重点，不过提到了就顺带解释下。LE和BE代表字节序，分别表示字节从低位/高位开始。
+
+我们常接触到的CPU都是LE，所以windows里Unicode未指明字节序时默认指的是LE。
+
+node的Buffer API中基本都有相应的2种函数来处理LE、BE，贴个文档如下：
+```
+const buf = Buffer.from([0, 5]);
+
+// Prints: 5
+console.log(buf.readInt16BE());
+
+// Prints: 1280
+console.log(buf.readInt16LE());
+```
+
+## Node解码
+我第一次接触到该类问题，使用的是node处理，当时给我的选择有：
+* node-iconv（系统iconv的封装）
+* iconv-lite（纯js）
+
+由于node-iconv涉及node-gyp的build，而开发机是windows，node-gyp的环境准备以及后续的一系列安装和构建，让我这样的web开发人员痛（疯）不（狂）欲（吐）生（嘈），最后自然而然的选择了iconv-lite。
+
+解码的处理大致示意如下：
+
+```js
+const fs = require('fs')
+const iconv = require('iconv-lite')
+
+const buf = fs.readFileSync('/path/to/file')
+
+// 可以先截取前几个字节来判断是否存在BOM
+buf.slice(0, 3).equals(Buffer.from([0xef, 0xbb, 0xbf])) // UTF-8
+buf.slice(0, 2).equals(Buffer.from([0xff, 0xfe])) // UTF-16LE
+
+const str = iconv.decode(buf, 'gbk')
+
+// 解码正确的判断需要根据业务场景调整
+// 此处截取前几个字符判断是否有中文存在来确定是否解码正确
+// 也可以反向判断是否有乱码存在来确定是否解码正确
+// 正则表达式内常见的\u**就是unicode码点
+// 该区间是常见字符，如果有特定场景可以根据实际情况扩大码点区间
+/[\u4e00-\u9fa5]/.test(str.slice(0, 3))
+
+```
+
+## 前端解码
+随着ES2015<sup>1</sup>的浏览器实现越来越普及，前端编解码也成为了可能。以前通过form表单上传文件至后端解析内容的流程现在基本可以完全由前端处理，既少了与后端的网络交互，而且因为有界面反馈，用户体验上更直观。
+
+一般场景如下：
+
+```js
+const file = document.querySelector('.input-file').files[0]
+const reader = new FileReader()
+
+reader.onload = () => {
+	const content = reader.result
+}
+reader.onprogerss = evt => {
+	// 读取进度
+}
+reader.readAsText(file, 'utf-8') // encoding可修改
+```
+
+fileReader支持的encoding列表，可查阅[此处](https://developer.mozilla.org/en-US/docs/Web/API/TextDecoder/encoding)。
+
+>这里有一个比较有趣的现象，如果文件包含BOM，比如声明是UTF-8编码，那指定的encoding会无效，而且在输出的内容中会去掉BOM部分，使用起来更方便。
+
+如果对编码有更高要求的控制需求，可以转为输出TypedArray：
+
+```js
+reader.onload = () => {
+	const buf = new Uint8Array(reader.result)
+	// 进行更细粒度的操作
+}
+reader.readAsArrayBuffer(file)
+```
+
+获取文本内容的数据缓冲以后，可以调用TextDecoder继续解码，不过需要注意的是获得的TypedArray是包含BOM的：
+
+```js
+const decoder = new TextDecoder('gbk')
+const content = decoder.decode(buf)
+```
+
+如果文件比较大，可以使用Blob的slice来进行切割：
+
+```js
+const file = document.querySelector('.input-file').files[0]
+const blob = file.slice(0, 1024)
+```
+
+文件的换行不同操作系统不一致，如果需要逐行解析，需要视场景而定：
+
+* Linux: \n
+* Windows: \r\n
+* Mac OS: \r
+
+**注意：**这个是各系统默认文本编辑器的规则，如果是使用其他软件，比如常用的sublime、vscode、excel等等，都是可以自行设置换行符的，一般是\n或者\r\n。
+
+## 前端编码
+
+可以使用TextEncoder将字符串内容转换成TypedBuffer：
+
+```
+const encoder = new TextEncoder()
+encoder.encode(String)
+```
+值得注意的是，从Chrome 53开始，encoder只支持utf-8编码<sup>2</sup>，官方理由是其他编码用的太少了。这里有个[polyfill库](https://github.com/inexorabletash/text-encoding)，补充了移除的编码格式。
+
+## 前端生成文件
+前端编码完成后，一般都会顺势实现文件生成，示例代码如下：
+
+```
+const a = document.createElement('a')
+const buf = new TextEncoder()
+const blob = new Blob([buf.encode('我是文本')], {
+	type: 'text/plain'
+})
+a.download = 'file'
+a.href = URL.createObjectURL(blob)
+a.click()
+// 主动调用释放内存
+URL.revokeObjectURL(blob)
+```
+
+这样就会生成一个文件名为file的文件，后缀由type决定。如果需要导出csv，那只需要修改对应的MIME type:
+
+```
+const blob = new Blob([buf.encode('第一行,1\r\n第二行,2')], {
+	type: 'text/csv'
+})
+```
+
+一般csv都默认是由excel打开的，这时候会发现第一列的内容都是乱码，因为excel沿用了windows判断编码的逻辑（上文提到），当发现无BOM时，采用GB18030编码进行解码而导致内容乱码。
+
+这时候只需要加上BOM指明编码格式即可：
+
+```
+const blob = new Blob([new Uint8Array([0xef, 0xbb, 0xbf]), buf.encode('第一行,1\r\n第二行,2')], {
+	type: 'text/csv'
+})
+
+// or
+
+const blob = new Blob([buf.encode('\ufeff第一行,1\r\n第二行,2')], {
+	type: 'text/csv'
+})
+```
+
+这里稍微说明下，因为UTF-8和UTF-16LE都属于Unicode字符集，只是实现不同。所以通过一定的规则，两种编码可以相互转换，而表明UTF-16LE的BOM转成UTF-8编码其实就是表明UTF-8的BOM。
+
+
+
+*附：*
+
+1. [TypedArray](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray)
+2. [TextEncoder](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder/TextEncoder)
+
+<br>
