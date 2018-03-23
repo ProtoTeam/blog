@@ -12,8 +12,8 @@
  - 设计模式
 
 ## 最新2篇文章
-    * [我们需要注意的 immutable 操作 -- hustcc](https://github.com/ProtoTeam/blog/blob/master/201803/3.md)
-    * [如何学习一门编程语言或框架 -- Alan](https://github.com/ProtoTeam/blog/blob/master/201803/1.md)
+   * [我们需要注意的 immutable 操作 -- hustcc](https://github.com/ProtoTeam/blog/blob/master/201803/3.md)
+   * [如何学习一门编程语言或框架 -- Alan](https://github.com/ProtoTeam/blog/blob/master/201803/1.md)
 
 ## 历史文章列表
 * 工程实践
