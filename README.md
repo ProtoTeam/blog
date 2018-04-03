@@ -12,8 +12,8 @@
  - 设计模式
 
 ## 最新2篇文章
-    * [如何写一个拖拽日历组件（附源码） -- Kid](https://github.com/ProtoTeam/blog/blob/master/201804/1.md)
-    * [我们需要注意的 immutable 操作 -- hustcc](https://github.com/ProtoTeam/blog/blob/master/201803/3.md)
+ - [如何写一个拖拽日历组件（附源码） -- Kid](https://github.com/ProtoTeam/blog/blob/master/201804/1.md)
+ - [我们需要注意的 immutable 操作 -- hustcc](https://github.com/ProtoTeam/blog/blob/master/201803/3.md)
 
 ## 历史文章列表
 * 工程实践
