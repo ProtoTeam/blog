@@ -12,11 +12,12 @@
  - 设计模式
 
 ## 最新2篇文章
+ - [如何在疲劳的JS世界中持续学习 -- cnfi](https://github.com/ProtoTeam/blog/blob/master/201805/1.md)
  - [Dive Into Code: VSCode 源码阅读（一） -- zqlu](https://github.com/ProtoTeam/blog/blob/master/201804/3.md)
- - [如何绘制一个类甘特图（附源码） -- Kid](https://github.com/ProtoTeam/blog/blob/master/201804/2.md)
 
 ## 历史文章列表
 * 工程实践
+    * [如何在疲劳的JS世界中持续学习 -- cnfi](https://github.com/ProtoTeam/blog/blob/master/201805/1.md)
     * [如何学习一门编程语言或框架 -- Alan](https://github.com/ProtoTeam/blog/blob/master/201803/1.md)
     * [重构 - 代码整洁之道 -- 新茗](https://github.com/ProtoTeam/blog/blob/master/201801/3.md)
     * [未来的前端工程师 -- aoto](https://github.com/ProtoTeam/blog/blob/master/201712/1.md)
