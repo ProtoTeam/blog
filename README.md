@@ -12,11 +12,12 @@
  - 设计模式
 
 ## 最新2篇文章
+ - [Immutable 操作在 React 中的实践 -- Amy](https://github.com/ProtoTeam/blog/blob/master/201805/2.md)
  - [如何在疲劳的JS世界中持续学习 -- cnfi](https://github.com/ProtoTeam/blog/blob/master/201805/1.md)
- - [Dive Into Code: VSCode 源码阅读（一） -- zqlu](https://github.com/ProtoTeam/blog/blob/master/201804/3.md)
 
 ## 历史文章列表
 * 工程实践
+    * [Immutable 操作在 React 中的实践 -- Amy](https://github.com/ProtoTeam/blog/blob/master/201805/2.md)
     * [如何在疲劳的JS世界中持续学习 -- cnfi](https://github.com/ProtoTeam/blog/blob/master/201805/1.md)
     * [如何学习一门编程语言或框架 -- Alan](https://github.com/ProtoTeam/blog/blob/master/201803/1.md)
     * [重构 - 代码整洁之道 -- 新茗](https://github.com/ProtoTeam/blog/blob/master/201801/3.md)
