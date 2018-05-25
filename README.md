@@ -13,8 +13,8 @@
  - 源码解析
 
 ## 最新2篇文章
+ - [TypeScript 2.8下的终极React组件模式 -- zqlu](https://github.com/ProtoTeam/blog/blob/master/201805/4.md)
  - [如何阅读大型前端开源项目的源码 -- Daniel](https://github.com/ProtoTeam/blog/blob/master/201805/3.md)
- - [Immutable 操作在 React 中的实践 -- Amy](https://github.com/ProtoTeam/blog/blob/master/201805/2.md)
 
 ## 历史文章列表
 * 工程实践
@@ -35,6 +35,7 @@
     * [无头浏览器 Puppeteer 初探 -- felix](https://github.com/ProtoTeam/blog/blob/master/201710/2.md)
     * [跨页面通信的各种姿势 -- nekron](https://github.com/ProtoTeam/blog/blob/master/201709/3.md)
 * Typescript
+    * [TypeScript 2.8下的终极React组件模式 -- zqlu](https://github.com/ProtoTeam/blog/blob/master/201805/4.md)
     * [TypeScript 实践 -- aoto](https://github.com/ProtoTeam/blog/blob/master/201803/2.md)
     * [用TypeScript编写发布函数库 -- zqlu](https://github.com/ProtoTeam/blog/blob/master/201711/4.md)
     * [TypeScript体系调研报告 -- aoto](https://github.com/ProtoTeam/blog/blob/master/201709/2.md)
