@@ -13,8 +13,8 @@
  - 源码解析
 
 ## 最新2篇文章
+ - [视频播放--踩坑小计 -- chenjsh36](https://github.com/ProtoTeam/blog/blob/master/201806/1.md)
  - [TypeScript 2.8下的终极React组件模式 -- zqlu](https://github.com/ProtoTeam/blog/blob/master/201805/4.md)
- - [如何阅读大型前端开源项目的源码 -- Daniel](https://github.com/ProtoTeam/blog/blob/master/201805/3.md)
 
 ## 历史文章列表
 * 工程实践
@@ -27,6 +27,7 @@
     * [5分钟前端国际化 -- Kid](https://github.com/ProtoTeam/blog/blob/master/201710/1.md)
     * [如何管理好10万行代码的前端单页面应用 -- 导演](https://github.com/ProtoTeam/blog/blob/master/201709/1.md)
 * 前端技术
+    * [视频播放--踩坑小计 -- chenjsh36](https://github.com/ProtoTeam/blog/blob/master/201806/1.md)
     * [我们需要注意的 immutable 操作 -- hustcc](https://github.com/ProtoTeam/blog/blob/master/201803/3.md)
     * [用 preload 预加载页面资源 -- felix](https://github.com/ProtoTeam/blog/blob/master/201802/1.md)
     * [Event Loop的规范和实现 -- nekron](https://github.com/ProtoTeam/blog/blob/master/201801/2.md)
