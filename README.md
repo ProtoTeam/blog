@@ -13,11 +13,12 @@
  - 源码解析
 
 ## 最新2篇文章
+ - [Webpack 4 配置最佳实践 -- Daniel](https://github.com/ProtoTeam/blog/blob/master/201806/3.md)
  - [前端开发-领域驱动设计 -- Kid](https://github.com/ProtoTeam/blog/blob/master/201806/2.md)
- - [视频播放--踩坑小计 -- chenjsh36](https://github.com/ProtoTeam/blog/blob/master/201806/1.md)
 
 ## 历史文章列表
 * 工程实践
+    * [Webpack 4 配置最佳实践 -- Daniel](https://github.com/ProtoTeam/blog/blob/master/201806/3.md)
     * [前端开发-领域驱动设计 -- Kid](https://github.com/ProtoTeam/blog/blob/master/201806/2.md)
     * [如何阅读大型前端开源项目的源码 -- Daniel](https://github.com/ProtoTeam/blog/blob/master/201805/3.md)
     * [Immutable 操作在 React 中的实践 -- Amy](https://github.com/ProtoTeam/blog/blob/master/201805/2.md)
