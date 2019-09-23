@@ -1,0 +1,15 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "author": "ProtoTeam",
+  "license": "ISC",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-md ./"
+    }
+  },
+  "devDependencies": {
+    "husky": "^3.0.5",
+    "lint-md-cli": "^0.1.1"
+  }
+}
