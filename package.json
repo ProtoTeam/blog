@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "author": "ProtoTeam",
   "license": "ISC",
+  "scripts": {
+    "test": "lint-md ./"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-md ./"
