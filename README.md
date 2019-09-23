@@ -47,7 +47,6 @@
     * [如何写一个拖拽日历组件（附源码） -- Kid](https://github.com/ProtoTeam/blog/blob/master/201804/1.md)
     * [一起炫起来 -- 3D 粒子动画篇 -- Coco](https://github.com/ProtoTeam/blog/blob/master/201711/1.md)
     * [用代码构建星辰大海 -- wuyue](https://github.com/ProtoTeam/blog/blob/master/201711/2.md)
-    * [超好用的命令行图表库 - tcharts.js -- hustcc](https://github.com/ProtoTeam/blog/blob/master/201711/3.md)
     * [SVG 动态绘制不规则图形 -- wuyue](https://github.com/ProtoTeam/blog/blob/master/201710/4.md)
 * 设计模式
     * [Typescript 玩转设计模式 之 对象行为型模式（下） -- joey](https://github.com/ProtoTeam/blog/blob/master/201802/2.md)
@@ -58,3 +57,6 @@
 * 源码解析
     * [Dive Into Code: VSCode 源码阅读（一） -- zqlu](https://github.com/ProtoTeam/blog/blob/master/201804/3.md)
     * [浅析 redux-saga 实现原理 -- joey](https://github.com/ProtoTeam/blog/blob/master/201710/3.md)
+* 造轮子
+    * [超好用的命令行图表库 - tcharts.js -- hustcc](https://github.com/ProtoTeam/blog/blob/master/201711/3.md)
+    * [Electron 下运行 Jest 单测 - Jest-electron -- hustcc](https://github.com/ProtoTeam/blog/blob/master/201909/1.md)
