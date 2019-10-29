@@ -33,6 +33,7 @@
   - [未来的前端工程师 -- aoto](https://github.com/ProtoTeam/blog/blob/master/201712/1.md)
   - [5 分钟前端国际化 -- Kid](https://github.com/ProtoTeam/blog/blob/master/201710/1.md)
   - [如何管理好 10 万行代码的前端单页面应用 -- 导演](https://github.com/ProtoTeam/blog/blob/master/201709/1.md)
+  - [umi-request 网络请求之路 -- 栗头](https://github.com/ProtoTeam/blog/blob/master/201910/2.md)
 - 前端技术
   - [视频播放--踩坑小计 -- chenjsh36](https://github.com/ProtoTeam/blog/blob/master/201806/1.md)
   - [我们需要注意的 immutable 操作 -- hustcc](https://github.com/ProtoTeam/blog/blob/master/201803/3.md)
