@@ -49,6 +49,7 @@
   - [TypeScript 实践 -- aoto](https://github.com/ProtoTeam/blog/blob/master/201803/2.md)
   - [用 TypeScript 编写发布函数库 -- zqlu](https://github.com/ProtoTeam/blog/blob/master/201711/4.md)
   - [TypeScript 体系调研报告 -- aoto](https://github.com/ProtoTeam/blog/blob/master/201709/2.md)
+  - [React + Typescript 工程化治理实践](https://github.com/ProtoTeam/blog/blob/master/201911/2.md)
 - 图形渲染
   - [如何绘制一个类甘特图（附源码） -- Kid](https://github.com/ProtoTeam/blog/blob/master/201804/2.md)
   - [如何写一个拖拽日历组件（附源码） -- Kid](https://github.com/ProtoTeam/blog/blob/master/201804/1.md)
