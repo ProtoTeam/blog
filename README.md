@@ -51,6 +51,7 @@
   - [TypeScript 体系调研报告 -- aoto](https://github.com/ProtoTeam/blog/blob/master/201709/2.md)
   - [React + Typescript 工程化治理实践](https://github.com/ProtoTeam/blog/blob/master/201911/2.md)
 - 图形渲染
+  - [你绝对想不到柱形图背后有这么多故事 -- zqlu](https://github.com/ProtoTeam/blog/blob/master/201912/1.md)
   - [如何绘制一个类甘特图（附源码） -- Kid](https://github.com/ProtoTeam/blog/blob/master/201804/2.md)
   - [如何写一个拖拽日历组件（附源码） -- Kid](https://github.com/ProtoTeam/blog/blob/master/201804/1.md)
   - [一起炫起来 -- 3D 粒子动画篇 -- Coco](https://github.com/ProtoTeam/blog/blob/master/201711/1.md)
