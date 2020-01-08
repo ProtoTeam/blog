@@ -4,7 +4,7 @@
   "author": "ProtoTeam",
   "license": "ISC",
   "scripts": {
-    "test": "lint-md ./"
+    "lint": "lint-md ./"
   },
   "husky": {
     "hooks": {
