@@ -2,7 +2,7 @@
   "name": "blog",
   "version": "1.0.0",
   "author": "ProtoTeam",
-  "license": "ISC",
+  "license": "MIT",
   "scripts": {
     "lint": "lint-md ./"
   },
