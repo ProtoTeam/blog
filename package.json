@@ -2,9 +2,9 @@
   "name": "blog",
   "version": "1.0.0",
   "author": "ProtoTeam",
-  "license": "ISC",
+  "license": "MIT",
   "scripts": {
-    "test": "lint-md ./"
+    "lint": "lint-md ./"
   },
   "husky": {
     "hooks": {
