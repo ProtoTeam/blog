@@ -4,7 +4,8 @@
   "author": "ProtoTeam",
   "license": "MIT",
   "scripts": {
-    "lint": "lint-md ./"
+    "lint": "lint-md ./",
+    "test": "npm run lint"
   },
   "husky": {
     "hooks": {

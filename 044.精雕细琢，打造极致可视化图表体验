@@ -1,0 +1,315 @@
+# 精雕细琢，打造极致可视化图表体验
+
+> **TL;DR：极致体验图表库 G2Plot 开源地址**: [https://github.com/antvis/G2Plot](https://github.com/antvis/G2Plot)
+
+
+我们目前所在的产品是 DeepInsight，主要负责 DeepInsight 跟可视化相关的问题，为了解决 DeepInsight 在可视化体验上的一些问题，我们深度参入了 G2 整个技术栈的开发。
+
+<a name="hDcTj"></a>
+## 背景
+
+DeepInsight 是一个数据分析和洞察工具，通过简单的页面操作，就快速可以生成一份业务报表。我们可以先看一个简单的视频介绍，了解一下 DeepInsight 到底是什么？
+
+
+其实，我们可以更加简单的理解为，DeepInsight 主要包含有两大部分：
+
+- 数据源：可以连接各种各样的本地、远程数据源，获得数据
+- 可视化能力：拥有不同种类的数据可视化图表
+
+上述两者结合起来，将数据灌入到可视化图表中，然后通过页面上的布局，就可以形成一份有业务含义的数据报表。
+
+目前，DeepInsight 上包含有 50+ 的可视化图表组件，每天图表在集团内部曝光量搞到 50 万+，是目前集团内最大的 BI 产品，也在内部获得了一些奖项，比如“2019 年阿里人最喜爱的办公神器”。DeepInsight 通过数据可视化带来的数据洞察，影响了不计其数的公司决策。
+
+然而，在迭代过程中，我们收到了很多的跟数据可视化相关的体验问题。我们简单看几个例子：
+
+| ![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578892580445-12be694b-b60b-46bc-9240-afaf2bb83707.png#align=left&display=inline&height=273&name=image.png&originHeight=546&originWidth=891&size=100149&status=done&style=none&width=445.5) | ![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578892570976-4edf286e-3b9e-48ab-aa5c-04e77cb7c63d.png#align=left&display=inline&height=231&name=image.png&originHeight=462&originWidth=904&size=179952&status=done&style=none&uid=1578892570843-0&width=452) | ![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578892592886-5649f90d-52b6-45ec-9f44-7df6bcae6fc3.png#align=left&display=inline&height=282&name=image.png&originHeight=563&originWidth=772&size=130292&status=done&style=none&width=386) | ![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578892606102-24f9f290-40a5-4abb-988d-ca05c7768cda.png#align=left&display=inline&height=242&name=image.png&originHeight=483&originWidth=762&size=179844&status=done&style=none&width=381) | ![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578892613535-7cf7d1bc-c77a-4260-a651-07d55bba9279.png#align=left&display=inline&height=216&name=image.png&originHeight=431&originWidth=648&size=147054&status=done&style=none&uid=1578892613463-0&width=324) |
+| --- | --- | --- | --- | --- |
+
+
+像这样的数据可视化体验问题，在产品迭代过程中，我们收集到 100+ 个。
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891603868-de03ff36-de84-456f-b218-8d29781aca5f.png#align=left&display=inline&height=424&name=image.png&originHeight=848&originWidth=1790&size=619536&status=done&style=none&width=895)
+
+这些问题除了带来数据可视化体验上的问题之外，一部分也可能会导致用户在数据阅读中，产生错误的数据洞察，从而产生错误的数据决策。所以修复这些体验问题，变得不仅紧急，而且非常重要。
+
+
+<a name="ZZgHz"></a>
+## AntV + DeepInsight
+
+DeepInsight 在可视化技术上，使用了开源社区上比较活跃的三方图表库，要在这个基础上，修复上述 100+ 问题，会存在很多问题：
+
+1. 发现任何问题，都无法得到快速的响应
+1. 部分体验问题的修复，需要底层架构，不进行架构改造，无法彻底完美解决
+1. 而如果在上层进行 hack 修复，不仅花费大量时间，而且收获的也仅仅是一个不稳定的解决方案
+
+而于此同时，蚂蚁内部自研的 G2。
+
+1. 基于**图形语法**，具有厚实的理论基础，这套理论也是目前所有顶尖 BI 产品的可视化基础。
+1. 具有很强的**扩展性**，可以幻化万千可视化表达
+1. 而且经过 5 年的迭代，服务公司内网 20000 个业务系统，**已经趋于成熟**。
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891603914-21672e6e-91b4-4f71-9951-b502619553da.png#align=left&display=inline&height=212&name=image.png&originHeight=423&originWidth=1768&size=684953&status=done&style=none&width=884)
+
+> 基于上述的原因，我们最终决定放弃使用三方图表库，而直接使用 G2 去解决上述的图表体验问题。
+
+
+为了做成这个事情，我们主要做了两件大的事情。
+
+- 架构升级 —— G2 4.0
+- 打磨图表体验
+
+
+<a name="DnKd0"></a>
+## G2 4.0 新架构
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891603837-e2c41b99-c7a5-410f-b8f0-272458b2b7d7.png#align=left&display=inline&height=396&name=image.png&originHeight=792&originWidth=1684&size=123978&status=done&style=none&width=842)
+
+G2 4.0 的架构可以描述成以上架构图。我们可以理解成它主要包含的两大部分：
+
+- 静态渲染
+- 动态交互
+
+图形静态渲染就是将可视化组件（Axis、Legend...）和图形（Line、Interval...） 这些元素组织到一起，然后通过一个布局逻辑，将他们有序的绘制到画布上。
+
+图形动态交互是指图形的交互能力，这个对于数据分析来说非常重要。G2 中通过提供丰富的事件、元素的状态量，来构建一层基础的交互机制，然后基于这个交互机制，去实现一套配置式的自定义交互语法，降低交互开发成本。
+
+那么我会着重介绍两点和图标体验打磨相关的技术点，以及它在新旧版本中的对比：
+
+1. 画布的约束布局
+1. 交互语法
+
+<a name="o5pcX"></a>
+### Auto Padding vs 约束布局
+
+- **G2 3.x 中的 Auto Padding**
+
+**![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891603834-214d9549-a346-4291-8d2a-cc15bf4f360e.png#align=left&display=inline&height=256&name=image.png&originHeight=512&originWidth=1510&size=224251&status=done&style=none&width=755)**
+
+大搞的流程是：
+
+1. 在一个 400*300 的画布中，首先将图形部分绘制到画布中，占满整个画布；
+1. 然后根据 x y 数据字段，来绘制 x y 轴，并放到画布下方和左方；
+1. 根据分组字段绘制图形，并放置到下方；
+1. 然后将超出画布的部分，座位图形的 padding
+1. 向内收缩图形，形成最终的图表
+
+这是一个通用的方案，所有类型的图表绘制，都是用这样的一个方案，带来的问题有：
+
+| ![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578892646476-c6238bcf-fccb-45df-9cbf-41b59cdabec4.png#align=left&display=inline&height=142&name=image.png&originHeight=371&originWidth=494&size=30304&status=done&style=none&width=189) | ![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578892654559-10e955ba-5fca-440a-9bc0-8680ec144137.png#align=left&display=inline&height=187&name=image.png&originHeight=374&originWidth=652&size=104209&status=done&style=none&width=326) | ![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578892663280-0d1cb123-be7b-4893-b785-74825a19ee7e.png#align=left&display=inline&height=187&name=image.png&originHeight=374&originWidth=579&size=69928&status=done&style=none&uid=1578892663195-0&width=289.5) |
+| --- | --- | --- |
+
+
+1. 因为坐标做标签超长，导致左侧的 padding 太多，所以画布左边空白比较多
+1. 因为左侧图例的大小不对，导致左侧 padding 过小，所以图例和坐标轴挤到一起
+1. x 轴在画布收缩过程中，因为宽度变小，导致轴标签进行了自动旋转，导致被画布裁剪
+
+等等，这些有和画布布局相关的问题，80% 都是和 auto padding 相关，并且因为是一个通用布局方案，所以这些问题很难进行修复。
+
+> 为了解决可视化图表在静态渲染中遇到的裁剪、碰撞问题，我们将约束布局引入到可视化中。
+
+
+- **G2 4.0 中的约束布局**
+
+约束布局的理论依据是**线性等式、不等式的非负解求解算法**。我们看个例子。
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891603884-80ce938c-072c-45ef-9917-47768d9f1b10.png#align=left&display=inline&height=235&name=image.png&originHeight=470&originWidth=958&size=108010&status=done&style=none&width=479)
+
+这个求解算法是非常成熟的算法，在不同语言上都有对应的算法实现。而且在 Android、iOS 中，都提供对应在 UI 布局上的约束布局能力。结合这个算法，我们将约束布局的能力引入到可视化图表渲染中来。
+
+举个例子：
+
+首先，我们规定，所有的图表元素都有四个变量 x y width height，他们决定了元素在画布中的决定定位。
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891603878-0f32b280-19e1-4b68-8eab-60a146cbb86e.png#align=left&display=inline&height=218&name=image.png&originHeight=436&originWidth=1516&size=212914&status=done&style=none&width=758)
+
+基于图形中元素的相对位置关系，我们可以列出这样的约束关系方程组。然后代入算法求解：
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891603866-7b21f89c-d024-4eb9-84fe-6b06da70183e.png#align=left&display=inline&height=125&name=image.png&originHeight=250&originWidth=426&size=55216&status=done&style=none&width=213)
+
+就可以获得所有元素的位置大小信息，拿到这些信息，再进行画布的渲染，就没有任何难度了。使用约束给我们带来了哪些好处呢？
+
+1. 将画布布局的问题转化成数学求解问题
+1. 解除了因为组件之间的位置依赖关系带来的布局代码耦合
+1. 强大的布局能力，是响应式图表的基础
+
+> 约束布局可以解决了静态渲染中常见的组件裁剪、遮挡问题。另外一个大的部分就是动态交互的优化和增强。
+
+
+<a name="yHnFA"></a>
+### Event + API vs 交互语法
+
+- **G2 3.x Event + API**
+
+在我们进行 web 页面上的交互开发的时候，我们常常的逻辑是这样的（以 jQuery 为例）：
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891603871-529fda66-e08b-48ec-b5d5-0553e8c71b5f.png#align=left&display=inline&height=152&name=image.png&originHeight=304&originWidth=774&size=51332&status=done&style=none&width=387)
+
+基本逻辑就是通过找到对应的元素，监听事件，然后在事件触发的时候，执行相应的动作和命令。（比如上图是清理缓存的交互）
+
+而在 G2 3.x 中，采用了类似的形式去开发交互，比如下面在图例 hover 的时候，高亮图形。
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891603877-2b118dbb-2225-48fe-b48b-7f7c7e6d8168.png#align=left&display=inline&height=358&name=image.png&originHeight=715&originWidth=732&size=134481&status=done&style=none&width=366)
+
+基于 Event + API 的方式，可以很灵活的开发自定义交互，完全没有任何限制，这是他的优点，但是缺点也很明显：
+
+1. 需要精通底层的架构和 API，开发成本高
+1. 开发交互的流程代码很繁杂丑陋
+1. 代码逻辑几乎无法复用
+
+> 为了解决这些问题，降低自定义交互开发的成本，我们在 G2 4.0 中提出了交互语法。
+
+
+- **G2 4.0 交互语法**
+
+**<br />![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891603892-bb94ba6c-60ae-4382-a047-c11e1248641a.png#align=left&display=inline&height=412&name=image.png&originHeight=824&originWidth=1758&size=333622&status=done&style=none&width=879)
+
+首先，我们将一个交互过程定义为 5 个阶段：
+
+1. 示能
+1. 开始
+1. 持续
+1. 结束
+1. 回滚
+
+每个阶段又包含有：
+
+- 触发：触发这个交互阶段的事件和来源；G2 4.0 内置 200+ 组合事件
+- 反馈：触发之后，对应执行的 Action；G2 4.0 内置 30+ 多个 Action
+
+通过这些之后，我们开发一个交互就是配置的过程，我们看一个例子：
+
+![Dec-21-2019 17-22-41.gif](https://cdn.nlark.com/yuque/0/2020/gif/86342/1578891603925-3a86799e-137b-4a07-922f-31ea58bb018c.gif#align=left&display=inline&height=406&name=Dec-21-2019%2017-22-41.gif&originHeight=406&originWidth=526&size=1692086&status=done&style=none&width=526)
+
+这是一个圈选图形，生成 mark 展示全选区域，然后选中的图形进行高亮。对应各个阶段的触发和反馈配置就是：
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891603900-e76e8796-0380-40ec-ac46-3e828b01c468.png#align=left&display=inline&height=410&name=image.png&originHeight=820&originWidth=1756&size=314465&status=done&style=none&width=878)
+
+而最终用到代码中的交互配置就是：
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891603912-9c6e4429-b225-4ed0-a1f8-e864f87212d7.png#align=left&display=inline&height=395&name=image.png&originHeight=789&originWidth=984&size=273250&status=done&style=none&width=492)
+
+通过这样的方式，我们可以大大降低自定义交互的自定义成本，开发者只需要利用 G2 提供的丰富的内置事件和 Action，通过拼接组合就是完成交互的开发。
+
+最后总结一下 G2 这部分的内容。G2 包含有三大部分：
+
+1. 图形语法，可以提供图表变换的丰富度
+1. 约束布局，提供强大图表静态渲染和布局能力
+1. 交互福安，可以让我们低成本的开发复杂交互
+
+基于这些我们就去做我们新的一个产品 G2Plot，去逐一打磨可视化图表的体验细节。
+
+
+<a name="8LaQQ"></a>
+## 打磨图表体验
+
+对于图表体验的打磨，我们其实很多很多事情，这里我们就以折柱饼的数据标签为例，来进行介绍。
+
+另外，我们对于可视化图表的体验打磨，都是基于 AntV [可视化设计原则](https://antv.vision/zh/docs/specification/principles/basic)，他是 Ant Design 在可视化方向的扩展。概括起来就是四个词：准确，有效，清晰，美。
+
+下面我们就逐一介绍折柱饼得数据标签（多图预警）。
+
+<a name="7briE"></a>
+### 折线图
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891603931-ba8fa53d-8474-4689-b42c-044cb4f19155.png#align=left&display=inline&height=410&name=image.png&originHeight=820&originWidth=1738&size=531521&status=done&style=none&width=869)
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891603930-c5a19fa9-82ed-49ce-a5ed-d65906d58119.png#align=left&display=inline&height=410&name=image.png&originHeight=820&originWidth=1732&size=463383&status=done&style=none&width=866)
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891603939-ef994a4e-31af-4af7-ae92-f0f0f5812ffa.png#align=left&display=inline&height=413&name=image.png&originHeight=826&originWidth=1744&size=435209&status=done&style=none&width=872)
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891604012-7eb21751-b0a1-4a77-9126-006404fd1cbf.png#align=left&display=inline&height=408&name=image.png&originHeight=816&originWidth=1740&size=645889&status=done&style=none&width=870)
+
+最后我们做一个简单的竞品对比：
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891603975-be13a8ce-3561-4582-abac-aabfaf4a6a9a.png#align=left&display=inline&height=465&name=image.png&originHeight=930&originWidth=1756&size=595001&status=done&style=none&width=878)
+
+
+<a name="V9fSJ"></a>
+### 柱形图
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891603989-9e066a55-7c81-438e-bafc-218378517ea2.png#align=left&display=inline&height=414&name=image.png&originHeight=828&originWidth=1762&size=387833&status=done&style=none&width=881)<br />![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891604014-5f9b9969-f744-4a79-985a-25e180fdcf98.png#align=left&display=inline&height=356&name=image.png&originHeight=712&originWidth=1744&size=435870&status=done&style=none&width=872)
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891604038-5a66daf4-75e3-4acd-a6b3-3f986e777845.png#align=left&display=inline&height=350&name=image.png&originHeight=700&originWidth=1738&size=538343&status=done&style=none&width=869)
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891604060-7d7c04f8-dc19-40bc-82b4-c6bd40f9281c.png#align=left&display=inline&height=360&name=image.png&originHeight=720&originWidth=1734&size=553302&status=done&style=none&width=867)
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891604079-34c49242-a5d8-4884-8496-fd416bc69013.png#align=left&display=inline&height=417&name=image.png&originHeight=834&originWidth=1736&size=494456&status=done&style=none&width=868)
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891604045-fed990bf-34c5-4b7b-ad69-2439acdb76f5.png#align=left&display=inline&height=396&name=image.png&originHeight=792&originWidth=1748&size=467376&status=done&style=none&width=874)
+
+最后同样，我们看一下竞品的对比情况：
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891604092-c3a30310-ff9a-4a76-94e0-947068690e47.png#align=left&display=inline&height=463&name=image.png&originHeight=926&originWidth=1752&size=539076&status=done&style=none&width=876)
+
+<a name="Xj0A8"></a>
+### 饼图
+
+饼图的数据标签问题，其实是比较常见的问题。对于饼图，我们先介绍其中一种数据标签的迭代逻辑。
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891604087-f13819a5-ae43-4b07-b81e-16c8c3e41e48.png#align=left&display=inline&height=463&name=image.png&originHeight=926&originWidth=1752&size=706062&status=done&style=none&width=876)
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891604081-79648530-9210-4be8-9db6-f6184bec42c8.png#align=left&display=inline&height=363&name=image.png&originHeight=726&originWidth=1712&size=618742&status=done&style=none&width=856)
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891604095-489ad189-3a79-48bc-89ec-258f08de30d3.png#align=left&display=inline&height=423&name=image.png&originHeight=846&originWidth=1708&size=721869&status=done&style=none&width=854)
+
+这个是标签布局逻辑，算是在数量大的情况下，比较符合效果的。当然除了这个布局之外，我们还提供多种布局效果：
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891604138-d5e1e0a1-1eea-4ce9-bc59-edda5fa84d7a.png#align=left&display=inline&height=397&name=image.png&originHeight=794&originWidth=1082&size=773698&status=done&style=none&width=541)
+
+当然，对于饼图，我们也有对应的最佳实践规范：
+
+1. 饼图区块数量不超过 8 个
+1. 超出的区域合并到“其他”区块中，然后 tooltip 显示其他区块的详细信息
+
+最后我们看下在饼图数据标签中，和竞品的对比情况。
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891604149-3806539f-b385-47bf-9e90-b8b396bf7630.png#align=left&display=inline&height=426&name=image.png&originHeight=852&originWidth=1758&size=504784&status=done&style=none&width=879)
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891604153-4007ff4c-3063-4dbc-90c1-4557df50baab.png#align=left&display=inline&height=460&name=image.png&originHeight=920&originWidth=1756&size=1100598&status=done&style=none&width=878)
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891604216-8a6e9ded-10d0-404e-9ce5-284f863e5f83.png#align=left&display=inline&height=464&name=image.png&originHeight=928&originWidth=1766&size=813895&status=done&style=none&width=883)
+
+总体效果来看，G2Plot 是都是最优的效果。
+
+<a name="CRyzf"></a>
+### 其他
+
+除了上述对于折柱饼的数据标签优化之外，我们还做了其他很多的可视化图表体验优化。
+
+| ![Dec-19-2019 17-47-25.gif](https://cdn.nlark.com/yuque/0/2020/gif/86342/1578892826877-ca84a1dc-892f-4a96-a200-b36f61b57984.gif#align=left&display=inline&height=233&name=Dec-19-2019%2017-47-25.gif&originHeight=532&originWidth=842&size=1620368&status=done&style=none&width=368) | ![1578106109655-eed7980f-4893-4d49-8778-b9d6e287059f.gif](https://cdn.nlark.com/yuque/0/2020/gif/86342/1578892826905-cc64dc36-9019-49c1-8397-e50e29867879.gif#align=left&display=inline&height=295&name=1578106109655-eed7980f-4893-4d49-8778-b9d6e287059f.gif&originHeight=469&originWidth=600&size=591602&status=done&style=none&width=378) | ![1575824038407-46f54b90-e637-47b5-8b63-546d46088e63.gif](https://cdn.nlark.com/yuque/0/2020/gif/86342/1578892826878-2ab5ad36-08f7-4a5e-bb24-b07a4d795f96.gif#align=left&display=inline&height=864&name=1575824038407-46f54b90-e637-47b5-8b63-546d46088e63.gif&originHeight=864&originWidth=1680&size=1414352&status=done&style=none&width=1680) |
+| --- | --- | --- |
+| 缩略轴标签自动切换位置，防止被裁剪。 | 跟随图例，一个很经典的storytelling 案例 | 联通区间，让数据对比更加清晰。 |
+
+
+等等，还有很多的优化点，篇幅原因，不一一赘述。
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891604212-8a77c0cb-e41b-49eb-8f89-d37327a8f02d.png#align=left&display=inline&height=418&name=image.png&originHeight=835&originWidth=1654&size=688773&status=done&style=none&width=827)
+
+<a name="sBA6I"></a>
+## DeepInsight 体验问题
+
+最后利用这些体验优化的成果，我们应用到我们业务产品 DeepInsignt 中。现阶段：
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891604220-dc12188a-da0b-49aa-8130-03287418de81.png#align=left&display=inline&height=417&name=image.png&originHeight=834&originWidth=1712&size=372489&status=done&style=none&width=856)
+
+
+<a name="26fKr"></a>
+## 总结
+
+最后，对我们做的事情做一个简单的总结。
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891604226-60d107e4-9217-44d9-9a1c-450c5c45834e.png#align=left&display=inline&height=303&name=image.png&originHeight=606&originWidth=772&size=230590&status=done&style=none&width=386)
+
+1. G2 是一个基于图形语法理论的统计图表引擎，支持丰富的图表渲染能力，目前官网上支持 250 多种可视化图表组件，在这个强大的图表渲染能力上，我们增加了交互语法，让图形的动态交互扩展变得更加容易。
+1. 基于强大的 G2，我们创建了我们新的开源产品 —— G2Plot。G2Plot 是一个配置式的、易于接入的统计图表库，通过一个简单、灵活的配置项，就可以生成一个可视化图形。此外，它最重要的关注点就在于，他专注于可视化图表的极致体验，花费大量的精力去解决其他产品不愿意解决的体验问题。
+1. 然后基于 G2Plot 图表库，我们会继续打造出 AVA 智能可视化。直接接入数据，即可智能推荐出合适的可视化图形。然后通过页面上的操作，就可以对生成的图形进行配置，基本实现零成本接入可视化，进一步降低使用成本，提升用户体验。
+
+当然最重要的是，我们所有的工作，都开源在 GtiHub，所有社区上的同学，都可以免费的使用我们图标体验优化的成果。
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891604229-6a1329fd-ade3-4e41-891c-0d326d1e03e6.png#align=left&display=inline&height=329&name=image.png&originHeight=658&originWidth=1210&size=670928&status=done&style=none&width=605)
+
+最后欢迎一起进行技术交流。
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/86342/1578891604216-54ef8548-ab3b-45aa-9f78-bec53ab4c92f.png#align=left&display=inline&height=304&name=image.png&originHeight=608&originWidth=842&size=232255&status=done&style=none&width=421)
+
+**G2Plot**: [https://github.com/antvis/G2Plot](https://github.com/antvis/G2Plot)
